@@ -1,11 +1,17 @@
 /** @format */
 
-import type { ActionArgs, LinksFunction } from "@remix-run/node";
-import { Link, useActionData, useSearchParams } from "@remix-run/react";
+import type { ActionArgs, LinksFunction, MetaFunction } from "@remix-run/node";
+import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+
 import stylesUrl from "~/styles/login.css";
 import { db } from "~/utils/db.server";
 import { badRequest } from "~/utils/request.server";
 import { createUserSession, login, register } from "~/utils/session.server";
+
+export const meta: MetaFunction = () => ({
+  description: "Login to submit your own jokes to Remix Jokes!",
+  title: "Remix Jokes | Login",
+});
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: stylesUrl }];
 
@@ -106,7 +112,7 @@ export default function Login() {
     <div className='container'>
       <div className='content' data-light=''>
         <h1>Login</h1>
-        <form method='post'>
+        <Form method='post'>
           <input type='hidden' name='redirectTo' value={searchParams.get("redirectTo") ?? undefined} />
           <fieldset>
             <legend className='sr-only'>Login or Register?</legend>
@@ -166,7 +172,7 @@ export default function Login() {
           <button type='submit' className='button'>
             Submit
           </button>
-        </form>
+        </Form>
       </div>
       <div className='links'>
         <ul>
