@@ -3,6 +3,7 @@
 import type { LinksFunction, LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import type { FC } from "react";
 
 import stylesUrl from "~/styles/jokes.css";
 import { db } from "~/utils/db.server";
@@ -77,3 +78,12 @@ export default function JokesRoute() {
     </div>
   );
 }
+
+export const ErrorBoundary: FC<{ error: Error }> = ({ error }) => {
+  return (
+    <div className='error-container'>
+      <h1>Jokes Error</h1>
+      <pre>{error.message}</pre>
+    </div>
+  );
+};

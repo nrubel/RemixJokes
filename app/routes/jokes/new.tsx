@@ -3,6 +3,7 @@
 import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
+import type { FC } from "react";
 
 import { db } from "~/utils/db.server";
 import { badRequest } from "~/utils/request.server";
@@ -106,3 +107,7 @@ export default function NewJokeRoute() {
     </div>
   );
 }
+
+export const ErrorBoundary: FC = () => {
+  return <div className='error-container'>Something unexpected went wrong. Sorry about that.</div>;
+};

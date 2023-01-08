@@ -2,7 +2,8 @@
 
 import type { LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useParams } from "@remix-run/react";
+import type { FC } from "react";
 
 import { db } from "~/utils/db.server";
 
@@ -16,7 +17,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   return json({ joke });
 };
 
-export default function JokeRoute() {
+const JokeRoute: FC = () => {
   const data = useLoaderData<typeof loader>();
 
   return (
@@ -26,4 +27,11 @@ export default function JokeRoute() {
       <Link to='.'>{data.joke.name} Permalink</Link>
     </div>
   );
-}
+};
+
+export const ErrorBoundary: FC = () => {
+  const { jokeId } = useParams();
+  return <div className='error-container'>{`There was an error loading joke by the id ${jokeId}. Sorry.`}</div>;
+};
+
+export default JokeRoute;

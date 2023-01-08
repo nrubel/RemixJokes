@@ -2,6 +2,7 @@
 
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import type { FC } from "react";
 
 import { db } from "~/utils/db.server";
 
@@ -26,3 +27,7 @@ export default function JokesIndexRoute() {
     </div>
   );
 }
+
+export const ErrorBoundary: FC = () => {
+  return <div className='error-container'>I did a whoopsies.</div>;
+};
